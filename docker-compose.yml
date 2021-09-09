@@ -1,0 +1,19 @@
+version: '2.1'
+
+services:
+  terraria:
+    build: .
+    ports:
+      - 7777:7777
+    volumes:
+      - ${WORLD_PATH:?Missing WORLD_PATH}:/root/.local/share/Terraria/Worlds
+    command:
+      - -world
+      - /root/.local/share/Terraria/Worlds/${WORLD:?Missing WORLD}.wld
+      - -password
+      - ${PASSWORD:?Missing PASSWORD}
+      - -maxplayers
+      - '16'
+    restart: always
+    tty: true
+    stdin_open: true
